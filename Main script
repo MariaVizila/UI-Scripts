@@ -1,0 +1,30 @@
+-- Map of supported game PlaceIds to script filenames
+local Games = {
+    [142823291] = "MM2",        -- Murder Mystery 2 PlaceId
+    [12109643] = "Fencing",    -- Fencing PlaceId (example; replace if needed)
+}
+
+local gameName = Games[game.PlaceId]
+if not gameName then
+    warn("This game is not supported by LunarHub.")
+    return
+end
+
+local scriptsFolder = "LunarHub/Scripts"
+local scriptPath = scriptsFolder .. "/" .. gameName .. ".lua"
+
+if not isfile then
+    warn("Your executor does not support isfile/readfile required for this script.")
+    return
+end
+
+if isfile(scriptPath) then
+    local success, err = pcall(function()
+        loadstring(readfile(scriptPath))()
+    end)
+    if not success then
+        warn("Failed to execute script '" .. gameName .. "': " .. tostring(err))
+    end
+else
+    warn("Script file '" .. gameName .. ".lua' not found in folder LunarHub/Scripts.")
+end
